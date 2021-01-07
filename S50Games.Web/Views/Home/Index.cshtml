@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+
+    List<Stage> stages = (List<Stage>)ViewBag.Stages;
+}
+
+@if (!User.Identity.IsAuthenticated)
+{
+    <div>
+        <h4>Welcome</h4>
+        <div>Please login to play game</div>
+    </div>
+}
+else
+{
+    <div>
+        <h4>Hello, @User.Identity.Name</h4>
+        <form asp-action="creategame">
+            <div class="w-50 p-3 border-dark rounded my-3">
+                <h6>STAGES</h6>
+                @foreach (var item in stages)
+                {
+                    <button class="btn btn-outline-dark btn-block" type="submit" name="stageId" value="@item.StageId">@item.StageId</button>
+                }
+            </div>
+        </form>
+    </div>
+}
